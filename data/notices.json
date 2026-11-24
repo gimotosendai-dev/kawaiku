@@ -1,0 +1,47 @@
+{
+  "_note": "ダミーデータ。お知らせ・臨時休所・おたよりの見本",
+  "notices": [
+    {
+      "id": "nt001",
+      "facility_id": "smiley",
+      "title": "令和9年度 入園願書受付のお知らせ",
+      "body": "青山幼稚園の入園願書を受け付けています。詳しくは園までお問い合わせください。（ダミー）",
+      "published_on": "2026-11-02",
+      "expires_on": "2026-12-25"
+    },
+    {
+      "id": "nt002",
+      "facility_id": "sukusuku",
+      "title": "ボランティアママ・学生ボランティア募集中",
+      "body": "★印の活動のお手伝いをしてくださる方を募集しています。お電話ください。（ダミー）",
+      "published_on": "2026-11-01",
+      "expires_on": "2026-11-30"
+    },
+    {
+      "id": "nt003",
+      "facility_id": "pocket",
+      "title": "1月分からイベント予約はアプリのみになります",
+      "body": "1月分の予約から、施設アプリでの受付のみとなります。（ダミー）",
+      "published_on": "2026-11-01",
+      "expires_on": "2027-01-31"
+    }
+  ],
+  "closures": [
+    {
+      "id": "cl001",
+      "facility_id": "hotland",
+      "date": "2026-11-26",
+      "reason": "園行事のため臨時休所（ダミー）"
+    }
+  ],
+  "newsletters": [
+    { "id": "nl001", "facility_id": "sukusuku", "month": "2026-11", "file_url": null },
+    { "id": "nl002", "facility_id": "hotland", "month": "2026-11", "file_url": null },
+    { "id": "nl003", "facility_id": "suwakko", "month": "2026-11", "file_url": null },
+    { "id": "nl004", "facility_id": "papira", "month": "2026-11", "file_url": null },
+    { "id": "nl005", "facility_id": "oideoide", "month": "2026-11", "file_url": null },
+    { "id": "nl006", "facility_id": "smiley", "month": "2026-11", "file_url": null },
+    { "id": "nl007", "facility_id": "pocket", "month": "2026-11", "file_url": null },
+    { "id": "nl008", "facility_id": "tetote", "month": "2026-11", "file_url": null }
+  ]
+}

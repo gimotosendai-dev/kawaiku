@@ -1,0 +1,177 @@
+{
+  "_note": "ダミーデータ。各センター2026年11月号を元に簡略化。施設の許可前は一般公開しないこと",
+  "facilities": [
+    {
+      "id": "sukusuku",
+      "name": "すくすくランド",
+      "host": "育英保育園内",
+      "address": "薩摩川内市中郷四丁目187番地",
+      "phone": "0996-22-5800",
+      "open_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ],
+      "open_time": "10:00",
+      "close_time": "15:30",
+      "reservation_type": "onsite_or_phone",
+      "reservation_url": null,
+      "reservation_note": "毎月初めの開所日に来所して予約表へ記入。翌々日以降は電話予約も可",
+      "target_note": "就学前の親子・妊婦さん",
+      "color": "mint"
+    },
+    {
+      "id": "hotland",
+      "name": "ほっとランド",
+      "host": "清水丘保育園内",
+      "address": "薩摩川内市宮里町3048番地9",
+      "phone": "0996-22-8313",
+      "open_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ],
+      "open_time": "9:30",
+      "close_time": "15:00",
+      "reservation_type": "onsite_or_phone",
+      "reservation_url": null,
+      "reservation_note": "予約表に記入（電話でも可）",
+      "target_note": "就学前の親子",
+      "color": "peach"
+    },
+    {
+      "id": "suwakko",
+      "name": "すわっこ",
+      "host": "すわこども園内",
+      "address": "薩摩川内市樋脇町市比野550番地",
+      "phone": "0996-38-1193",
+      "open_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat"
+      ],
+      "open_time": "10:00",
+      "close_time": "15:00",
+      "reservation_type": "phone",
+      "reservation_url": null,
+      "reservation_note": "電話で予約（ダミー：要確認）",
+      "target_note": "就学前の親子",
+      "color": "lemon"
+    },
+    {
+      "id": "papira",
+      "name": "ぱぴぃら",
+      "host": "鹿児島純心大学附属純心幼稚園内",
+      "address": "薩摩川内市隈之城町1001番地",
+      "phone": "0996-25-1815",
+      "open_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ],
+      "open_time": "9:30",
+      "close_time": "14:45",
+      "reservation_type": "external_app",
+      "reservation_url": null,
+      "reservation_note": "施設の連絡アプリで予約。新規の方は電話で連絡",
+      "target_note": "就学前の親子",
+      "color": "lavender"
+    },
+    {
+      "id": "oideoide",
+      "name": "おいでおいで",
+      "host": "関小児科医院（医療法人九十九会）",
+      "address": "薩摩川内市西向田町18番26号",
+      "phone": "0996-20-6682",
+      "open_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat"
+      ],
+      "open_time": "9:30",
+      "close_time": "15:30",
+      "reservation_type": "phone",
+      "reservation_url": null,
+      "reservation_note": "電話で予約（ダミー：要確認）",
+      "target_note": "0〜3歳の親子",
+      "color": "sky"
+    },
+    {
+      "id": "smiley",
+      "name": "スマイリィ",
+      "host": "認定こども園青山幼稚園内",
+      "address": "薩摩川内市青山町4194番地",
+      "phone": "0996-20-0775",
+      "open_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ],
+      "open_time": "10:00",
+      "close_time": "15:00",
+      "reservation_type": "external_web",
+      "reservation_url": null,
+      "reservation_note": "施設の予約ページから（電話予約は受付開始日の午後から）",
+      "target_note": "就学前の親子",
+      "color": "pink"
+    },
+    {
+      "id": "pocket",
+      "name": "ぽけっと",
+      "host": "せんだい幼稚園",
+      "address": "薩摩川内市平佐町3669-1-B棟",
+      "phone": "080-2779-6723",
+      "open_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat"
+      ],
+      "open_time": "9:00",
+      "close_time": "14:00",
+      "reservation_type": "external_app",
+      "reservation_url": null,
+      "reservation_note": "施設のアプリで3日前までに予約（1月分からアプリのみ）",
+      "target_note": "就学前の親子・妊婦さん",
+      "color": "apricot"
+    },
+    {
+      "id": "tetote",
+      "name": "てとて",
+      "host": "川内すわこども園内",
+      "address": "薩摩川内市御陵下町19番5号",
+      "phone": "0996-20-2630",
+      "open_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat"
+      ],
+      "open_time": "9:30",
+      "close_time": "14:30",
+      "reservation_type": "external_web",
+      "reservation_url": null,
+      "reservation_note": "施設のWeb予約のみ",
+      "target_note": "0〜5歳の就学前の親子",
+      "color": "sage"
+    }
+  ]
+}
