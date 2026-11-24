@@ -5,7 +5,7 @@
     #/event/ev001   → イベント詳細（ev001 がイベントのID）
   「#」より後ろが変わってもページの再読み込みは起きないので、切り替えが速い。
 */
-import { renderTop } from './pages/top.js';
+import { renderTop, setupTop } from './pages/top.js';
 import { renderEvent } from './pages/event.js';
 import { renderNotFound } from './pages/not-found.js';
 
@@ -14,8 +14,9 @@ const app = document.getElementById('app');
 
 // URL の形と、そのとき使う画面の関数の対応表
 // :id の部分は何でもよく、画面の関数に params.id として渡される
+// setup は「画面を描いたあとに動かす処理」（ボタンの動きなど）。ない画面は書かなくてよい
 const routes = [
-  { path: '/', render: renderTop },
+  { path: '/', render: renderTop, setup: setupTop },
   { path: '/event/:id', render: renderEvent },
 ];
 
@@ -51,6 +52,7 @@ async function router() {
     const params = matchRoute(route.path, path);
     if (params) {
       app.innerHTML = await route.render(params);
+      route.setup?.(params); // setup がある画面だけ実行する
       window.scrollTo(0, 0); // 画面が変わったら一番上から表示
       return;
     }

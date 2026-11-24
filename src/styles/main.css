@@ -1,7 +1,9 @@
 /*
   レイアウト（並べ方・大きさ）
-  色や大きさは tokens.css の変数だけを使う。
+  色・角丸・余白・文字サイズは tokens.css の変数だけを使う。
 */
+
+/* ===== 全体 ===== */
 
 /* 幅の計算に枠線と内側の余白を含める（レイアウトが崩れにくくなる） */
 *,
@@ -24,6 +26,8 @@ body {
   max-width: 480px;
   margin: 0 auto;
   padding: var(--space-4);
+  /* 下部ナビに最後の内容が隠れないよう、下に余白をとる */
+  padding-bottom: calc(var(--tap-min) + var(--space-6) * 2 + env(safe-area-inset-bottom, 0px));
 }
 
 h1 {
@@ -33,40 +37,399 @@ h1 {
 
 h2 {
   font-size: var(--font-size-lg);
-  margin: var(--space-5) 0 var(--space-3);
+  margin: 0 0 var(--space-3);
 }
 
 a {
   color: var(--color-primary);
 }
 
+p {
+  margin: 0;
+}
+
+/* hidden を付けた要素は必ず隠す（display: flex などを指定した要素にも効くように） */
+[hidden] {
+  display: none !important;
+}
+
 /* 補足の小さな文字 */
 .note {
   color: var(--color-text-sub);
   font-size: var(--font-size-sm);
+  margin-top: var(--space-2);
 }
 
-/* 仮のリスト（ステップ1の動作確認用） */
-.link-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.link-list a {
-  display: flex;
-  align-items: center;
-  min-height: var(--tap-min); /* 指で押しやすい高さ */
-  padding: var(--space-2) var(--space-3);
-  margin-bottom: var(--space-2);
+/* 「〜はありません」の表示 */
+.empty {
+  color: var(--color-text-sub);
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+/* ===== 施設の色 =====
+   class="fc-mint" を付けると、その中で
+   --fc（パステル）と --fc-strong（濃い色）が施設の色になる */
+.fc-mint     { --fc: var(--facility-mint);     --fc-strong: var(--facility-mint-strong); }
+.fc-peach    { --fc: var(--facility-peach);    --fc-strong: var(--facility-peach-strong); }
+.fc-lemon    { --fc: var(--facility-lemon);    --fc-strong: var(--facility-lemon-strong); }
+.fc-lavender { --fc: var(--facility-lavender); --fc-strong: var(--facility-lavender-strong); }
+.fc-sky      { --fc: var(--facility-sky);      --fc-strong: var(--facility-sky-strong); }
+.fc-pink     { --fc: var(--facility-pink);     --fc-strong: var(--facility-pink-strong); }
+.fc-apricot  { --fc: var(--facility-apricot);  --fc-strong: var(--facility-apricot-strong); }
+.fc-sage     { --fc: var(--facility-sage);     --fc-strong: var(--facility-sage-strong); }
+
+/* ===== ① ロゴ ===== */
+.site-header {
+  padding: var(--space-2) 0 var(--space-4);
+}
+
+.logo {
+  font-size: var(--font-size-xl);
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.logo-sub {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-sub);
+}
+
+/* ?date= で日付を変えているときの表示 */
+.demo-date {
+  display: inline-block;
+  margin-top: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-sub);
+}
+
+/* ===== ② 臨時休所の帯 ===== */
+.closure-band {
+  background: var(--color-alert-bg);
+  color: var(--color-alert-text);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-5);
+  font-size: var(--font-size-sm);
+}
+
+.closure-band__title {
+  font-weight: bold;
+}
+
+.closure-band ul {
+  margin: var(--space-1) 0 0;
+  padding-left: var(--space-5);
+}
+
+/* ===== 見出しのまとまり ===== */
+.section {
+  margin-bottom: var(--space-6);
+}
+
+.h2-sub {
+  font-size: var(--font-size-sm);
+  font-weight: normal;
+  color: var(--color-text-sub);
+}
+
+/* ===== ③ 今日のイベント（横スライド） ===== */
+.scroll-row {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;                  /* 横にはみ出した分はスライドで見る */
+  scroll-snap-type: x mandatory;     /* スライドを止めたとき、カードの端でぴったり止まる */
+  /* 画面の端までスライドできるよう、外側の余白の分だけ広げる */
+  margin: 0 calc(var(--space-4) * -1);
+  padding: var(--space-1) var(--space-4) var(--space-3);
+}
+
+.scroll-row .event-card {
+  flex: 0 0 72%;                     /* 次のカードが少し見えて、スライドできるとわかる幅 */
+  scroll-snap-align: start;
+}
+
+/* ===== ④ 近日のイベント（2列） ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+/* 「もっと見る」で出すカードの入れ物。中のカードを、ほかのカードと同じ大きさにする */
+.card-slot {
+  display: flex;
+}
+
+.card-slot > .event-card {
+  flex: 1;
+}
+
+/* 「もっと見る」ボタン（主ボタンより控えめな、枠線だけのボタン） */
+.more-button {
+  display: block;
+  width: 100%;
+  min-height: var(--tap-min);
+  margin-top: var(--space-4);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ===== イベントカード ===== */
+.event-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;                  /* 角丸からはみ出さないように */
   color: var(--color-text);
   text-decoration: none;
 }
 
-/* 仮のカード */
+/* 上部の施設色の帯 */
+.event-card__band {
+  background: var(--fc);
+  color: var(--fc-strong);
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+  padding: var(--space-1) var(--space-3);
+}
+
+/* 写真がないときのジャンルのアイコン */
+.event-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  background: var(--color-bg);
+  font-size: calc(var(--font-size-xl) * 1.5);
+}
+
+.event-card__img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.event-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3) var(--space-3);
+  flex: 1;
+}
+
+.event-card__title {
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.event-card__when {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-sub);
+}
+
+/* ===== タグ ===== */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: auto;                  /* カードの一番下にそろえる */
+  padding-top: var(--space-1);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  font-size: var(--font-size-xs);
+  line-height: 1.8;
+  white-space: nowrap;
+}
+
+.tag--strong {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary-text);
+}
+
+.tag--warn,
+.tag--cancel {
+  background: var(--color-alert-bg);
+  border-color: var(--color-alert-bg);
+  color: var(--color-alert-text);
+}
+
+/* ===== ⑤ お知らせ・⑦ 支援センターのリスト ===== */
+.plain-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.plain-list > li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+.list-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--tap-min);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.list-link__sub {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-sub);
+}
+
+/* 施設色の丸 */
+.dot {
+  flex: 0 0 auto;
+  width: var(--space-3);
+  height: var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--fc);
+  border: 2px solid var(--fc-strong);
+}
+
+.dot--lg {
+  width: var(--space-5);
+  height: var(--space-5);
+}
+
+.facility-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-right: var(--space-3);
+}
+
+.facility-row__main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  min-height: var(--tap-min);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.facility-row__name {
+  display: block;
+  font-weight: bold;
+}
+
+.tel-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ===== ⑥ おたより ===== */
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--fc);
+  color: var(--fc-strong);
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* ===== ⑧ フッター ===== */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
+}
+
+.site-footer a {
+  color: var(--color-text-sub);
+}
+
+/* ===== 下部ナビ ===== */
+.bottom-nav {
+  position: fixed;                   /* スクロールしても画面の下に固定 */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding-bottom: env(safe-area-inset-bottom, 0px); /* iPhoneの下のバーに重ならないように */
+}
+
+.bottom-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(var(--tap-min) + var(--space-4));
+  font-size: var(--font-size-xs);
+  color: var(--color-text-sub);
+  text-decoration: none;
+}
+
+.bottom-nav__icon {
+  font-size: var(--font-size-lg);
+  line-height: 1.2;
+}
+
+.bottom-nav__item.is-current {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.bottom-nav__item.is-disabled {
+  opacity: 0.6;
+}
+
+/* ===== ステップ1の仮画面用（イベント詳細はステップ3で作り直す） ===== */
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-md);
@@ -74,7 +437,6 @@ a {
   padding: var(--space-4);
 }
 
-/* 施設名のタグ（色は JS で施設ごとの変数を指定する） */
 .facility-tag {
   display: inline-block;
   padding: var(--space-1) var(--space-3);
