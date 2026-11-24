@@ -1,0 +1,10 @@
+# ライブラリ本体（npm install でいつでも作り直せるのでGitに入れない）
+node_modules/
+# ビルド結果（npm run build で作られる）
+dist/
+# 環境ごとの秘密の設定（Supabaseのキーなど）
+.env
+.env.*
+# エディタやOSが勝手に作るファイル
+.DS_Store
+*.log

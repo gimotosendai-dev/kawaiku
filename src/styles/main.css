@@ -1,0 +1,84 @@
+/*
+  レイアウト（並べ方・大きさ）
+  色や大きさは tokens.css の変数だけを使う。
+*/
+
+/* 幅の計算に枠線と内側の余白を含める（レイアウトが崩れにくくなる） */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+}
+
+/* アプリ全体の箱。スマホ幅を基準に、PCでは中央に寄せる */
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+h1 {
+  font-size: var(--font-size-xl);
+  margin: 0 0 var(--space-4);
+}
+
+h2 {
+  font-size: var(--font-size-lg);
+  margin: var(--space-5) 0 var(--space-3);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+/* 補足の小さな文字 */
+.note {
+  color: var(--color-text-sub);
+  font-size: var(--font-size-sm);
+}
+
+/* 仮のリスト（ステップ1の動作確認用） */
+.link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link-list a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap-min); /* 指で押しやすい高さ */
+  padding: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* 仮のカード */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4);
+}
+
+/* 施設名のタグ（色は JS で施設ごとの変数を指定する） */
+.facility-tag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+}
